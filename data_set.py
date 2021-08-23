@@ -10,7 +10,3 @@ class SquadDataset(torch.utils.data.Dataset):
 
     def __len__(self):
         return len(self.encodings.input_ids)
-
-
-train_dataset = SquadDataset(train_encodings)
-val_dataset = SquadDataset(val_encodings)

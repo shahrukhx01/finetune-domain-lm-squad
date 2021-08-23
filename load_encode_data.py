@@ -49,15 +49,16 @@ def add_end_idx(answers, contexts):
                     answer["answer_start"] = start_idx - n
                     answer["answer_end"] = end_idx - n
 
-        return answer, context
+        return answers, contexts
 
 
-def add_token_positions(encodings, answers):
+def add_token_positions(encodings, answers, tokenizer):
     # initialize lists to contain the token indices of answer start/end
     start_positions = []
     end_positions = []
     for i in range(len(answers)):
         # append start/end token position using char_to_token method
+        print(answers)
         start_positions.append(encodings.char_to_token(i, answers[i]["answer_start"]))
         end_positions.append(encodings.char_to_token(i, answers[i]["answer_end"]))
 

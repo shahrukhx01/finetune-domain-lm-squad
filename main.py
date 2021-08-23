@@ -28,8 +28,13 @@ if __name__ == "__main__":
     )
 
     # add token positions to encodings
-    train_encodings, train_answers = add_token_positions(train_encodings, train_answers)
-    val_encodings, val_answers = add_token_positions(val_encodings, val_answers)
+    print(train_answers)
+    train_encodings, train_answers = add_token_positions(
+        train_encodings, train_answers, tokenizer
+    )
+    val_encodings, val_answers = add_token_positions(
+        val_encodings, val_answers, tokenizer
+    )
 
     ## add torch dataset wrapper around train/val encodings
     train_dataset = SquadDataset(train_encodings)

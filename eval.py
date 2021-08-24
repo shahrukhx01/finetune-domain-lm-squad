@@ -1,14 +1,31 @@
 from torch.utils.data import DataLoader
 import torch
 from tqdm import tqdm
+import numpy as np
 
 
 def evaluate_model(model, val_dataset, device):
+    def val_collate(batch):
+        len_batch = len(batch)
+        batch = list(filter(lambda x: x is not None, batch))
+
+        if len_batch > len(batch):
+            db_len = len(val_dataset)
+            diff = len_batch - len(batch)
+            while diff != 0:
+                a = val_dataset[np.random.randint(0, db_len)]
+                if a is None:
+                    continue
+                batch.append(a)
+                diff -= 1
+
+        return torch.utils.data.dataloader.default_collate(batch)
+
     # switch model out of training mode
     model.eval()
 
     # val_sampler = SequentialSampler(val_dataset)
-    val_loader = DataLoader(val_dataset, batch_size=16)
+    val_loader = DataLoader(val_dataset, batch_size=16, collate_fn=val_collate)
 
     acc = []
 

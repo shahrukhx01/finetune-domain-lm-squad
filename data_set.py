@@ -8,7 +8,8 @@ class SquadDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         data = {}
         for key, val in self.encodings.items():
-            print(val[idx])
+            if (val[idx]) >= 1000000:
+                data[key] = 1
             data[key] = torch.tensor(val[idx])
 
         return data

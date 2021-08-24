@@ -30,6 +30,7 @@ def read_squad(path):
 
 
 def add_end_idx(answers, contexts):
+    answers = []
     # loop through each answer-context pair
     for answer, context in zip(answers, contexts):
         # gold_text refers to the answer we are expecting to find in context
@@ -49,6 +50,7 @@ def add_end_idx(answers, contexts):
                     # this means the answer is off by 'n' tokens
                     answer["answer_start"] = start_idx - n
                     answer["answer_end"] = end_idx - n
+        answers.append(answer)
 
         return answers, contexts
 

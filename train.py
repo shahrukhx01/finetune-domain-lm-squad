@@ -33,29 +33,32 @@ def train_lm_squad(
         # setup loop (we use tqdm for the progress bar)
         loop = tqdm(train_loader, leave=True)
         for batch in loop:
-            # initialize calculated gradients (from prev step)
-            optim.zero_grad()
-            # pull all the tensor batches required for training
-            input_ids = batch["input_ids"].to(device)
-            attention_mask = batch["attention_mask"].to(device)
-            start_positions = batch["start_positions"].to(device)
-            end_positions = batch["end_positions"].to(device)
-            # train model on batch and return outputs (incl. loss)
-            outputs = model(
-                input_ids,
-                attention_mask=attention_mask,
-                start_positions=start_positions,
-                end_positions=end_positions,
-            )
-            # extract loss
-            loss = outputs[0]
-            # calculate loss for every parameter that needs grad update
-            loss.backward()
-            # update parameters
-            optim.step()
-            # print relevant info to progress bar
-            loop.set_description(f"Epoch {epoch}")
-            loop.set_postfix(loss=loss.item())
+            try:
+                # initialize calculated gradients (from prev step)
+                optim.zero_grad()
+                # pull all the tensor batches required for training
+                input_ids = batch["input_ids"].to(device)
+                attention_mask = batch["attention_mask"].to(device)
+                start_positions = batch["start_positions"].to(device)
+                end_positions = batch["end_positions"].to(device)
+                # train model on batch and return outputs (incl. loss)
+                outputs = model(
+                    input_ids,
+                    attention_mask=attention_mask,
+                    start_positions=start_positions,
+                    end_positions=end_positions,
+                )
+                # extract loss
+                loss = outputs[0]
+                # calculate loss for every parameter that needs grad update
+                loss.backward()
+                # update parameters
+                optim.step()
+                # print relevant info to progress bar
+                loop.set_description(f"Epoch {epoch}")
+                loop.set_postfix(loss=loss.item())
+            except:
+                continue
 
     model.save_pretrained(save_model_name)
     tokenizer.save_pretrained(save_model_name)

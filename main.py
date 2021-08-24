@@ -43,7 +43,7 @@ if __name__ == "__main__":
     model, device = train_lm_squad(
         train_dataset,
         tokenizer,
-        pretrain_model_name=model_name,
+        pretrained_model_name=model_name,
         save_model_name="chemical-bert-uncased-squad",
     )
     ## evaluate model on validation set

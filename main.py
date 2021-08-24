@@ -1,5 +1,5 @@
 from load_encode_data import read_squad, add_end_idx, add_token_positions
-from transformers import BertTokenizer
+from transformers import FastBertTokenizer
 from data_set import SquadDataset
 from train import train_lm_squad
 from eval import evaluate_model
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     train_answers, train_contexts = add_end_idx(train_answers, train_contexts)
     val_answers, val_contexts = add_end_idx(val_answers, val_contexts)
 
-    tokenizer = BertTokenizer.from_pretrained(model_name)
+    tokenizer = FastBertTokenizer.from_pretrained(model_name)
 
     ## encode text data
     train_encodings = tokenizer(

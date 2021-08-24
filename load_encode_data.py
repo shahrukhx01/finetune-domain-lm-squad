@@ -1,4 +1,5 @@
 import json
+from tqdm import tqdm
 
 
 def read_squad(path):
@@ -10,7 +11,7 @@ def read_squad(path):
     questions = []
     answers = []
     # iterate through all data in squad data
-    for group in squad_dict["data"]:
+    for group in tqdm(squad_dict["data"]):
         for passage in group["paragraphs"]:
             context = passage["context"]
             for qa in passage["qas"]:

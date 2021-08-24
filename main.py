@@ -28,7 +28,6 @@ if __name__ == "__main__":
     )
 
     # add token positions to encodings
-    print(train_answers)
     train_encodings, train_answers = add_token_positions(
         train_encodings, train_answers, tokenizer
     )

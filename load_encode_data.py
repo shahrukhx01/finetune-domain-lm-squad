@@ -59,7 +59,6 @@ def add_token_positions(encodings, answers, tokenizer):
     end_positions = []
     for i in range(len(answers)):
         # append start/end token position using char_to_token method
-        print(answers)
         start_positions.append(encodings.char_to_token(i, answers[i]["answer_start"]))
         end_positions.append(encodings.char_to_token(i, answers[i]["answer_end"]))
 

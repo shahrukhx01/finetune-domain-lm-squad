@@ -9,7 +9,7 @@ import numpy as np
 def train_lm_squad(
     train_dataset,
     tokenizer,
-    epochs=3,
+    epochs=10,
     pretrained_model_name="shahrukhx01/chemical-bert-uncased",
     save_model_name="chemical-bert-uncased-squad",
 ):
@@ -78,7 +78,7 @@ def train_lm_squad(
             except:
                 continue
 
-    model.save_pretrained(save_model_name)
-    tokenizer.save_pretrained(save_model_name)
+        model.save_pretrained(f"{save_model_name}_{epoch}")
+        tokenizer.save_pretrained(f"{save_model_name}_{epoch}")
 
     return model, device

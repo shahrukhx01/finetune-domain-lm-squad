@@ -6,10 +6,7 @@ class SquadDataset(torch.utils.data.Dataset):
         self.encodings = encodings
 
     def __getitem__(self, idx):
-        try:
-            return {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
-        except:
-            pass
+        return {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
 
     def __len__(self):
         return len(self.encodings.input_ids)

@@ -5,7 +5,7 @@ from train import train_lm_squad
 from eval import evaluate_model
 
 if __name__ == "__main__":
-    model_name = "shahrukhx01/chemical-bert-uncased"
+    model_name = "shahrukhx01/chemical-bert-uncased-squad2"
 
     ## load data
     train_contexts, train_questions, train_answers = read_squad(

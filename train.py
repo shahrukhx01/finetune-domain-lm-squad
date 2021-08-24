@@ -9,7 +9,7 @@ import numpy as np
 def train_lm_squad(
     train_dataset,
     tokenizer,
-    epochs=10,
+    epochs=20,
     pretrained_model_name="shahrukhx01/chemical-bert-uncased",
     save_model_name="chemical-bert-uncased-squad",
 ):
